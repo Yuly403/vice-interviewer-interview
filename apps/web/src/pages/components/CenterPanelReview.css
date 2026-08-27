@@ -1,0 +1,302 @@
+/* ═══════════════════════════════════════════
+   CenterPanelReview — 企业级面评面板
+   ═══════════════════════════════════════════ */
+
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rp-revision {
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+}
+
+.rp-approved {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rp-approved-at {
+  font-size: var(--text-xs);
+  color: var(--color-gray-400);
+}
+
+.rp-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rp-overview {
+  padding: 14px 16px;
+  background: var(--color-bg-base);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  line-height: var(--leading-relaxed);
+}
+
+.rp-evidence-summary {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-brand-100);
+  border-radius: 8px;
+  background: var(--color-brand-50);
+  color: var(--color-gray-600);
+  font-size: var(--text-xs);
+}
+.rp-evidence-summary strong { color: var(--color-brand-700); font-size: var(--text-md); }
+.rp-evidence-summary small { width: 100%; color: var(--color-gray-500); }
+
+.rp-edit-form { display: grid; gap: 12px; margin-bottom: 16px; }
+.rp-edit-form label { display: grid; gap: 6px; color: var(--color-gray-700); font-size: var(--text-sm); font-weight: 600; }
+.rp-edit-form textarea { width: 100%; resize: vertical; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-gray-700); font: inherit; font-weight: 400; line-height: var(--leading-relaxed); }
+.rp-edit-form textarea:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px var(--color-brand-light); }
+.rp-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rp-edit-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* ─── Conclusions ─── */
+.rp-conclusions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rp-conclusion {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-gray-300);
+  background: #fff;
+}
+
+.rp-conclusion-fact {
+  background: var(--color-ctype-fact-bg);
+  border-left-color: var(--color-ctype-fact-bar);
+}
+.rp-conclusion-inference {
+  background: var(--color-ctype-inference-bg);
+  border-left-color: var(--color-ctype-inference-bar);
+}
+.rp-conclusion-open_question {
+  background: var(--color-ctype-openq-bg);
+  border-left-color: var(--color-ctype-openq-bar);
+}
+.rp-conclusion-human_decision {
+  background: var(--color-ctype-human-bg);
+  border-left-color: var(--color-ctype-human-bar);
+}
+
+.rpc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.rpc-dim {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-brand);
+}
+
+.rpc-text {
+  font-size: var(--text-sm);
+  color: var(--color-gray-700);
+  line-height: var(--leading-relaxed);
+  margin-bottom: 8px;
+}
+
+.rpc-evidence {
+  font-size: var(--text-xs);
+}
+
+.rpc-evidence-label {
+  color: var(--color-gray-400);
+  font-weight: 500;
+}
+
+.rpc-quote {
+  margin: 4px 0 4px 12px;
+  padding: 4px 8px;
+  border-left: 2px solid var(--color-brand-400);
+  color: var(--color-gray-600);
+  font-style: italic;
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+}
+
+/* ─── Summary ─── */
+.rp-summary {
+  margin-top: 16px;
+}
+
+.rp-section {
+  margin-bottom: 12px;
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+}
+
+.rp-section strong {
+  color: var(--color-gray-800);
+}
+
+.rp-section ul {
+  margin: 4px 0 0 20px;
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+}
+
+.rp-section li {
+  margin-bottom: 4px;
+}
+
+.rp-export-btn {
+  margin-top: 16px;
+}
+
+/* ─── Approve Modal Options ─── */
+.rp-approve-options {
+  display: flex;
+  gap: 12px;
+}
+
+.rp-approve-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+.rp-approve-option:hover {
+  border-color: var(--color-brand);
+}
+.rp-approve-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rp-approve-icon {
+  font-size: 20px;
+  color: var(--color-gray-500);
+}
+
+.rp-approve-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-gray-800);
+}
+
+/* ─── Radar chart ─── */
+.rp-radar-section {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 640px) { .rp-edit-grid { grid-template-columns: 1fr; } }
+
+.rp-section-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: 8px;
+}
+
+/* ─── Export actions ─── */
+.rp-export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ─── Ledger badge in header ─── */
+.rp-ledger-badge {
+  margin-right: 4px;
+}
+
+/* ─── Ledger timeline ─── */
+.rp-ledger-timeline {
+  margin-top: var(--space-20);
+  padding: var(--space-14) var(--space-16);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.rp-ledger-timeline-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin: 0 0 var(--space-12);
+}
+
+.rp-ledger-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.rp-ledger-entry {
+  display: flex;
+  gap: var(--space-10);
+  padding-bottom: var(--space-12);
+  position: relative;
+}
+
+.rp-ledger-entry:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-gray-300);
+}
+
+.rp-ledger-entry-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--color-brand-200);
+  flex-shrink: 0;
+  margin-top: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.rp-ledger-entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.rp-ledger-entry-text {
+  font-size: var(--text-sm);
+  color: var(--color-gray-700);
+  line-height: var(--leading-relaxed);
+}
+
+.rp-ledger-entry-time {
+  font-size: var(--text-xs);
+  color: var(--color-gray-400);
+}

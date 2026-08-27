@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════
+   Design Tokens — 企业级 HR SaaS 主题
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ─── Brand / 品牌色 (青绿系) ─── */
+  --color-brand:       #2563EB;
+  --color-brand-hover: #1D4ED8;
+  --color-brand-light: #EFF6FF;
+  --color-brand-50:    #EFF6FF;
+  --color-brand-100:   #DBEAFE;
+  --color-brand-200:   #BFDBFE;
+  --color-brand-400:   #60A5FA;
+  --color-brand-500:   #2563EB;
+  --color-brand-600:   #2563EB;
+  --color-brand-700:   #1D4ED8;
+  --color-brand-800:   #1E40AF;
+
+  /* Alias for old primary references */
+  --color-primary-50:  var(--color-brand-50);
+  --color-primary-100: var(--color-brand-100);
+  --color-primary-200: var(--color-brand-200);
+  --color-primary-400: var(--color-brand-400);
+  --color-primary-500: var(--color-brand-500);
+  --color-primary-600: var(--color-brand-600);
+  --color-primary-700: var(--color-brand-700);
+  --color-primary-800: var(--color-brand-800);
+
+  /* ─── Semantic / 语义色 ─── */
+  --color-success-50:  #EFF6FF;
+  --color-success-100: #DBEAFE;
+  --color-success-500: #2563EB;
+  --color-success-700: #1D4ED8;
+
+  --color-warning-50:  #FFFBEB;
+  --color-warning-100: #FEF3C7;
+  --color-warning-200: #FDE68A;
+  --color-warning-500: #D97706;
+  --color-warning-700: #92400E;
+
+  --color-danger-50:  #FEF2F2;
+  --color-danger-100: #FEE2E2;
+  --color-danger-500: #DC2626;
+  --color-danger-600: #DC2626;
+  --color-danger-700: #991B1B;
+
+  --color-info-50:  #F0F9FF;
+  --color-info-100: #E0F2FE;
+  --color-info-500: #0EA5E9;
+  --color-info-700: #0369A1;
+
+  /* ─── Grays / 灰阶 ─── */
+  --color-gray-50:  #F8FAFC;
+  --color-gray-100: #F3F6FA;
+  --color-gray-150: #EDF1F7;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1E293B;
+  --color-gray-900: #0F172A;
+
+  /* ─── Background / 底色 ─── */
+  --color-bg-base:  var(--color-gray-100);
+  --color-bg-card:  #FFFFFF;
+
+  /* ─── Border / 边框体系 ─── */
+  --color-border:       var(--color-gray-200);
+  --color-border-light: var(--color-gray-150);
+
+  /* ─── Decision Colors / 决策色 (审批结论) ─── */
+  --color-pass-bg:     #DBEAFE;
+  --color-pass-text:   #1E40AF;
+  --color-pass-border: #93C5FD;
+
+  --color-hold-bg:     #FEF3C7;
+  --color-hold-text:   #92400E;
+  --color-hold-border: #FCD34D;
+
+  --color-reject-bg:     #FEE2E2;
+  --color-reject-text:   #991B1B;
+  --color-reject-border: #FCA5A5;
+
+  /* ─── Topic Status Colors / 话题状态色 ─── */
+  --color-topic-unasked:         #D1D5DB;
+  --color-topic-started:         #FDE68A;
+  --color-topic-evidence-partial: #FCD34D;
+  --color-topic-needs-followup:  #FCA5A5;
+  --color-topic-covered:         #60A5FA;
+  --color-topic-skipped:         #9CA3AF;
+  --color-topic-na:              #E5E7EB;
+
+  /* ─── Content Type Colors / 内容类型色 ─── */
+  --color-ctype-fact-bg:    var(--color-gray-100);
+  --color-ctype-fact-bar:   var(--color-gray-500);
+  --color-ctype-fact-label: var(--color-gray-600);
+
+  --color-ctype-inference-bg:    #F0F9FF;
+  --color-ctype-inference-bar:   #0EA5E9;
+  --color-ctype-inference-label: #0369A1;
+
+  --color-ctype-openq-bg:    #FFFBEB;
+  --color-ctype-openq-bar:   #D97706;
+  --color-ctype-openq-label: #92400E;
+
+  --color-ctype-human-bg:    var(--color-brand-50);
+  --color-ctype-human-bar:   var(--color-brand-500);
+  --color-ctype-human-label: var(--color-brand-700);
+
+  /* ─── Interview Status Colors / 面试状态色 ─── */
+  --color-status-created:              var(--color-gray-150);
+  --color-status-imported:             #E0F2FE;
+  --color-status-plan-generating:      #FEF3C7;
+  --color-status-plan-draft:           var(--color-brand-50);
+  --color-status-ready:                #DBEAFE;
+  --color-status-binding:              #FEF3C7;
+  --color-status-bound:                var(--color-brand-50);
+  --color-status-live:                 #FCE7F3;
+  --color-status-ending:               #FEF3C7;
+  --color-status-transcript-finalizing: #FEF3C7;
+  --color-status-review-generating:    #FEF3C7;
+  --color-status-review-draft:         var(--color-brand-50);
+  --color-status-review-approved:      #DBEAFE;
+  --color-status-synced:               #DBEAFE;
+  --color-status-closed:               var(--color-gray-150);
+  --color-status-attention:            #FEE2E2;
+  --color-status-cancelled:            var(--color-gray-100);
+
+  /* ─── Ledger / 台账状态 ─── */
+  --color-ledger-not-set:             var(--color-gray-100);
+  --color-ledger-in-progress:         #E0F2FE;
+  --color-ledger-evaluation-pending:  #FEF3C7;
+  --color-ledger-next-round:          #DBEAFE;
+  --color-ledger-offer-evaluation:    #BFDBFE;
+  --color-ledger-pending-confirm:     #FDE68A;
+  --color-ledger-rejected:            #FEE2E2;
+
+  /* ─── Spacing / 间距 ─── */
+  --space-4:  4px;
+  --space-6:  6px;
+  --space-8:  8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* ─── Radius / 圆角 ─── */
+  --radius-4:  4px;
+  --radius-6:  6px;
+  --radius-8:  8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-panel: 14px;
+
+  /* ─── Shadow / 阴影 (克制） ─── */
+  --shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md:  0 8px 24px rgba(37, 99, 235, 0.06);
+  --shadow-lg:  0 18px 48px rgba(15, 23, 42, 0.10);
+
+  /* ─── Transition / 过渡 ─── */
+  --transition-fast:   150ms ease;
+  --transition-normal: 200ms ease;
+
+  /* ─── Typography / 字体 ─── */
+  --font-sans: -apple-system, "SF Pro Text", "PingFang SC",
+    "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+
+  --text-xs:   12px;
+  --text-sm:   13px;
+  --text-base: 14px;
+  --text-md:   15px;
+  --text-lg:   16px;
+  --text-xl:   18px;
+  --text-2xl:  22px;
+
+  --leading-tight:   1.35;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  /* ─── Layout / 布局 ─── */
+  --header-height:  52px;
+  --sidebar-width:  280px;
+  --ai-panel-width: 320px;
+}

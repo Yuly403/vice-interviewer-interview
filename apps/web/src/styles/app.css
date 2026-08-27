@@ -1,0 +1,189 @@
+/* ═══════════════════════════════════════════
+   App Layout — 企业级 SaaS 页面壳
+   ═══════════════════════════════════════════ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--color-gray-900);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.logo-mark {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--color-brand);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.app-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-user {
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  font-weight: 500;
+}
+
+.app-logout-btn {
+  padding: 4px 12px;
+  font-size: var(--text-xs);
+  color: var(--color-gray-500);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.app-logout-btn:hover {
+  color: var(--color-danger-500);
+  border-color: var(--color-danger-500);
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--color-brand);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  z-index: 200;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 8px;
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
+
+.app-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  color: var(--color-gray-500);
+  font-size: var(--text-base);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Page Wrapper / 通用页 ─── */
+.page {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-header h1 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-gray-800);
+}
+
+/* ─── Responsive / 响应式 ─── */
+
+@media (max-width: 1023px) {
+  :root {
+    --ai-panel-width: 0px;
+  }
+
+  .page {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .wb-body {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto !important;
+  }
+
+  .page {
+    padding: 12px;
+  }
+
+  .page-header h1 {
+    font-size: var(--text-lg);
+  }
+
+  .app-header {
+    padding: 0 12px;
+  }
+
+  .app-header .logo {
+    font-size: var(--text-sm);
+  }
+
+  .il-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .il-search {
+    max-width: none;
+  }
+
+  .rp-export-actions {
+    flex-direction: column;
+  }
+}

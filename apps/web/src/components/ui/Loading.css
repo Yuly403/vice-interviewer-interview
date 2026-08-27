@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════
+   Loading — 企业级 Spinner + Skeleton
+   ═══════════════════════════════════════════ */
+
+/* ─── Spinner ─── */
+.spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px;
+}
+
+.spinner-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid var(--color-gray-150);
+  border-top-color: var(--color-brand);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-text {
+  font-size: var(--text-sm);
+  color: var(--color-gray-500);
+}
+
+/* ─── Skeleton (solid shimmer — no gradient) ─── */
+.skeleton {
+  background: var(--color-gray-150);
+  border-radius: 4px;
+  animation: skeleton-fade 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-fade {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+.skeleton-card {
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.skeleton-text-block {
+  padding: 16px 0;
+}

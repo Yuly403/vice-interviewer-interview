@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════════
+   CenterPanelTranscript — 企业级逐字稿面板
+   ═══════════════════════════════════════════ */
+
+.transcript-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.tl-load-more {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.tl-recent-marker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.tl-recent-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-brand-200);
+}
+
+.tl-recent-label {
+  font-size: var(--text-xs);
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.transcript-line {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+}
+
+.tl-role-interviewer {
+  border-left: 3px solid var(--color-brand);
+}
+
+.tl-role-candidate {
+  border-left: 3px solid var(--color-success-500);
+}
+
+.tl-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: var(--text-sm);
+}
+
+.tl-speaker {
+  font-weight: 600;
+  color: var(--color-gray-700);
+}
+
+.tl-role-label {
+  color: var(--color-gray-400);
+}
+
+.tl-time {
+  color: var(--color-gray-400);
+  margin-left: auto;
+}
+
+.tl-text {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-gray-700);
+}

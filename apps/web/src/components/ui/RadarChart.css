@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════════
+   RadarChart — 纯 SVG 雷达图 (PRD 5.1)
+   ═══════════════════════════════════════════ */
+
+.radar-chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-16) 0;
+}
+
+.radar-chart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  overflow: visible;
+}
+
+.radar-axis-label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--color-gray-600);
+  font-family: var(--font-sans);
+}
+
+/* Legend */
+.radar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-16);
+  justify-content: center;
+}
+
+.radar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  font-size: var(--text-sm);
+}
+
+.radar-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary-500);
+  flex-shrink: 0;
+}
+
+.radar-legend-dim {
+  color: var(--color-gray-600);
+  font-weight: 500;
+}
+
+.radar-legend-score {
+  color: var(--color-primary-600);
+  font-weight: 700;
+}
+
+.radar-empty {
+  padding: var(--space-24);
+  text-align: center;
+  color: var(--color-gray-400);
+  font-size: var(--text-sm);
+}

@@ -1,0 +1,167 @@
+/* LoginPage — 飞书登录页 */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  padding: 32px;
+  background: var(--color-bg-base);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-gray-800);
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.login-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-field label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+
+.login-field input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: var(--text-base);
+  color: var(--color-gray-800);
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.login-field input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px var(--color-brand-light);
+}
+
+.login-field input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-error {
+  font-size: var(--text-sm);
+  color: var(--color-danger-700);
+  background: var(--color-danger-50);
+  border: 1px solid var(--color-danger-100);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.login-btn {
+  margin-top: 4px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-brand);
+  color: #fff;
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.login-btn:hover:not(:disabled) {
+  background: var(--color-brand-hover);
+}
+
+.login-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.login-btn-feishu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0;
+  padding: 13px;
+  font-size: var(--text-lg);
+}
+
+.login-mock-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  background: none;
+  border: 1px dashed var(--color-gray-300);
+  border-radius: 6px;
+  padding: 8px;
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.login-mock-toggle:hover {
+  border-color: var(--color-gray-500);
+  color: var(--color-gray-600);
+}
+
+.login-form-mock {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg-base);
+}
+
+.login-loading-spinner {
+  width: 28px;
+  height: 28px;
+  margin: 32px auto 0;
+  border: 3px solid var(--color-gray-150);
+  border-top-color: var(--color-brand);
+  border-radius: 50%;
+  animation: login-spin 0.6s linear infinite;
+}
+
+@keyframes login-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-hint {
+  margin-top: 16px;
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-gray-400);
+}

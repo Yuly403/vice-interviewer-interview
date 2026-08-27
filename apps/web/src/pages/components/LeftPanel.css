@@ -1,0 +1,230 @@
+.left-panel {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.lp-head {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.lp-head h2 {
+  margin: 0;
+  color: var(--color-gray-900);
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.lp-edit {
+  border: 0;
+  background: transparent;
+  color: var(--color-brand-700);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.lp-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  padding: 6px;
+  border-bottom: 1px solid var(--color-border-light);
+  background: var(--color-gray-50);
+}
+
+.lp-tabs button {
+  height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.lp-tabs button:hover {
+  color: var(--color-brand-700);
+}
+
+.lp-tabs button.active {
+  background: #fff;
+  color: var(--color-brand-700);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.lp-scroll {
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+.lp-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.lp-avatar {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+  font-weight: 750;
+}
+
+.lp-profile strong,
+.lp-profile span {
+  display: block;
+}
+
+.lp-profile strong {
+  color: var(--color-gray-900);
+  font-size: var(--text-lg);
+}
+
+.lp-profile span {
+  margin-top: 3px;
+  color: var(--color-gray-500);
+  font-size: var(--text-sm);
+}
+
+.lp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-border-light);
+}
+
+.lp-grid div {
+  min-width: 0;
+  padding: 11px;
+  background: #fff;
+}
+
+.lp-grid span,
+.lp-grid strong {
+  display: block;
+}
+
+.lp-grid span {
+  margin-bottom: 5px;
+  color: var(--color-gray-400);
+  font-size: var(--text-xs);
+}
+
+.lp-grid strong {
+  color: var(--color-gray-700);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.lp-section {
+  margin-top: 18px;
+}
+
+.lp-section h3 {
+  margin: 0 0 9px;
+  color: var(--color-gray-800);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.lp-copy,
+.lp-muted,
+.lp-resume-text p {
+  margin: 0;
+  color: var(--color-gray-600);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.lp-muted {
+  color: var(--color-gray-400);
+}
+
+.lp-resume-text {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.lp-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-list li {
+  position: relative;
+  padding-left: 14px;
+  color: var(--color-gray-600);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.lp-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-brand-400);
+}
+
+.lp-list-warning li::before {
+  background: var(--color-warning-500);
+}
+
+.lp-disclosure {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.lp-disclosure summary {
+  color: var(--color-brand-700);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
+.lp-sticky {
+  margin-top: auto;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--color-border-light);
+  background: #fbfcfe;
+}
+
+@media (max-width: 1240px) {
+  .left-panel,
+  .lp-scroll {
+    overflow: visible;
+  }
+}

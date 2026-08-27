@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════════
+   EmptyState — 企业级空状态 (极简)
+   ═══════════════════════════════════════════ */
+
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.empty-state-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  color: var(--color-gray-400);
+  font-size: 20px;
+}
+
+.empty-state-title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-gray-500);
+}
+
+.empty-state-hint {
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+  max-width: 260px;
+}
+
+.empty-state-action {
+  margin-top: 8px;
+}

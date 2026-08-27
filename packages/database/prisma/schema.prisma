@@ -1,0 +1,343 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  // The deployment uses an isolated PostgreSQL service.  Keeping the URL in
+  // the environment lets each release use the same protected shared database
+  // without ever placing credentials in source control.
+  url      = env("DATABASE_URL")
+}
+
+model Interview {
+  id                      String   @id @default(uuid())
+  workspaceId             String   @default("default")
+  ownerUserId             String?
+  idempotencyKey          String?  @unique
+  candidateKey            String?
+  jobKey                  String?
+  packageJson             String?
+  packageHash             String?
+  applicationId           String
+  positionName            String?
+  roundType               String
+  scheduledAt             DateTime
+  durationMinutes         Int      @default(60)
+  status                  String   @default("created")
+  feishuEventId           String?
+  feishuMeetingId         String?
+  meetingBindingSource    String?
+  packageRevision         Int      @default(0)
+  planRevision            Int      @default(0)
+  transcriptRevision      Int      @default(0)
+  approvedReviewRevision  Int?
+  ledgerStatus            String   @default("not_set")
+  ledgerTransitions       String   @default("[]")
+  retentionUntil          DateTime?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  plan            InterviewPlan?
+  participants    InterviewParticipant[]
+  transcriptLines TranscriptLine[]
+  suggestions     LiveSuggestion[]
+  reviewDrafts    ReviewDraft[]
+  approvals       Approval[]
+  captureLease    CaptureLease?
+  owner           User?             @relation("InterviewOwner", fields: [ownerUserId], references: [id])
+  workspaceSyncs  WorkspaceSync[]
+  outboxEvents    OutboxEvent[]
+
+  @@index([workspaceId, scheduledAt])
+  @@index([ownerUserId])
+}
+
+model InterviewPlan {
+  id                    String   @id @default(uuid())
+  interviewId           String   @unique
+  revision              Int      @default(1)
+  openingBudgetMinutes  Int      @default(5)
+  closingBudgetMinutes  Int      @default(5)
+  totalDurationMinutes  Int
+  confirmedAt           DateTime?
+  confirmedBy           String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+  topics     Topic[]
+}
+
+model Topic {
+  id              String  @id @default(uuid())
+  planId          String
+  title           String
+  why             String
+  openingQuestion String
+  priority        String  @default("medium")
+  estimatedMinutes Int
+  status          String  @default("unasked")
+  locked          Boolean @default(false)
+  skipped         Boolean @default(false)
+  sortOrder       Int
+
+  plan      InterviewPlan @relation(fields: [planId], references: [id])
+  criteria  Criterion[]
+  followups FollowupQuestion[]
+  signals   TopicSignal[]
+  sourceRefs TopicSourceRef[]
+}
+
+model Criterion {
+  id               String  @id @default(uuid())
+  topicId          String
+  text             String
+  status           String  @default("missing")
+  evidenceLineIds  String  @default("[]")
+  aiExplanation    String?
+  humanOverrideValue String?
+  updatedAt        DateTime @default(now())
+
+  topic Topic @relation(fields: [topicId], references: [id])
+}
+
+model FollowupQuestion {
+  id       String @id @default(uuid())
+  topicId  String
+  question String
+
+  topic Topic @relation(fields: [topicId], references: [id])
+}
+
+model TopicSignal {
+  id      String @id @default(uuid())
+  topicId String
+  type    String
+  text    String
+
+  topic Topic @relation(fields: [topicId], references: [id])
+}
+
+model TopicSourceRef {
+  id          String  @id @default(uuid())
+  topicId     String
+  sourceType  String
+  sourceId    String
+  sourceRevision Int?
+  quote       String
+  paragraphIndex Int?
+
+  topic Topic @relation(fields: [topicId], references: [id])
+}
+
+model InterviewParticipant {
+  id                   String   @id @default(uuid())
+  interviewId          String
+  userId               String?
+  feishuOpenId         String?
+  displayName          String
+  role                 String
+  roleSource           String   @default("unknown")
+  confirmedBy          String?
+  confirmedAt          DateTime?
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+
+  @@unique([interviewId, userId])
+}
+
+model TranscriptLine {
+  id                 String   @id @default(uuid())
+  interviewId        String
+  sourceType         String
+  platformSentenceId String?
+  dedupKey           String?
+  speakerPlatformId  String?
+  speakerDisplayName String
+  speakerRole        String   @default("unknown")
+  roleSource         String   @default("unknown")
+  text               String
+  occurredAt         DateTime
+  receivedAt         DateTime @default(now())
+  revision           Int      @default(1)
+  contentHash        String?
+  isDeleted          Boolean  @default(false)
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+  revisions TranscriptLineRevision[]
+
+  @@unique([interviewId, sourceType, platformSentenceId])
+}
+
+model TranscriptLineRevision {
+  id         String   @id @default(uuid())
+  lineId     String
+  oldText    String
+  newText    String
+  modifiedBy String?
+  createdAt  DateTime @default(now())
+
+  line TranscriptLine @relation(fields: [lineId], references: [id])
+}
+
+model LiveSuggestion {
+  id                String   @id @default(uuid())
+  interviewId       String
+  kind              String
+  topicId           String?
+  observation       String
+  suggestedQuestion String?
+  evidenceLineIds   String   @default("[]")
+  confidence        Float
+  generation        Int
+  expiresAt         DateTime
+  feedback          String?
+  createdAt         DateTime @default(now())
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+}
+
+model ReviewDraft {
+  id                String   @id @default(uuid())
+  interviewId       String
+  revision          Int      @default(1)
+  reviewStatus      String   @default("not_started")
+  overview          String?
+  strengths         String   @default("[]")
+  risks             String   @default("[]")
+  openQuestions     String   @default("[]")
+  uncoveredTopics   String   @default("[]")
+  nextRoundFocus    String   @default("[]")
+  suggestedDecision       String?
+  humanDecision           String?
+  approvedBy              String?
+  approvedAt              DateTime?
+  syncConflicts           String?   // JSON — SyncConflictDetail[] 冲突快照
+  syncConflictsResolvedAt DateTime? // 冲突解决时间
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  interview   Interview           @relation(fields: [interviewId], references: [id])
+  conclusions ReviewConclusion[]
+}
+
+model ReviewConclusion {
+  id           String  @id @default(uuid())
+  reviewId     String
+  dimension    String
+  contentType  String
+  text         String
+  aiGenerated  Boolean @default(true)
+  humanEdited  Boolean @default(false)
+  sortOrder    Int     @default(0)
+
+  review       ReviewDraft    @relation(fields: [reviewId], references: [id])
+  evidenceRefs EvidenceRef[]
+}
+
+model EvidenceRef {
+  id             String  @id @default(uuid())
+  conclusionId   String
+  sourceType     String
+  sourceId       String
+  sourceRevision Int
+  quote          String
+  speakerRole    String?
+  occurredAt     DateTime?
+
+  conclusion ReviewConclusion @relation(fields: [conclusionId], references: [id])
+}
+
+model Approval {
+  id           String   @id @default(uuid())
+  interviewId  String
+  targetType   String
+  targetId     String
+  targetRevision Int
+  action       String
+  approvedBy   String
+  reason       String?
+  idempotencyKey String @unique
+  createdAt    DateTime @default(now())
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+}
+
+model User {
+  id                    String    @id @default(uuid())
+  feishuOpenId          String    @unique
+  displayName           String
+  email                 String?
+  role                  String    @default("recruiter")
+  avatarUrl             String?
+  // Kept only for one-way legacy migration. New code never writes this field.
+  feishuRefreshToken    String?
+  feishuRefreshTokenEncrypted String?
+  feishuTokenExpiresAt  DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  ownedInterviews       Interview[] @relation("InterviewOwner")
+}
+
+model CaptureLease {
+  interviewId   String   @id
+  ownerWorkerId String
+  leaseUntil    DateTime
+  heartbeatAt   DateTime @default(now())
+  cursor        String?
+  lastSuccessAt DateTime?
+
+  interview Interview @relation(fields: [interviewId], references: [id])
+}
+
+/// A durable record of an approved review exported through the local Workspace
+/// Bridge. It makes duplicate syncs and conflict handling observable instead of
+/// relying on file existence alone.
+model WorkspaceSync {
+  id              String   @id @default(uuid())
+  interviewId     String
+  reviewRevision  Int
+  status          String   @default("pending")
+  manifestJson    String
+  contentHash     String
+  targetPath      String?
+  errorCode       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  interview       Interview @relation(fields: [interviewId], references: [id])
+
+  @@unique([interviewId, reviewRevision])
+}
+
+/// Outbox records are written in the same transaction as sensitive state
+/// transitions. A worker can deliver them later without losing an event when a
+/// process dies between a database update and external/Bridge work.
+model OutboxEvent {
+  id           String   @id @default(uuid())
+  interviewId  String
+  eventType    String
+  payloadJson  String
+  dedupeKey    String   @unique
+  deliveredAt  DateTime?
+  attempts     Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  interview    Interview @relation(fields: [interviewId], references: [id])
+}
+
+model AuditEvent {
+  id          String   @id @default(uuid())
+  interviewId String
+  actorId     String
+  action      String
+  targetType  String
+  targetId    String?
+  fieldName   String?
+  oldValue    String?
+  newValue    String?
+  result      String
+  createdAt   DateTime @default(now())
+}

@@ -1,0 +1,237 @@
+.topic-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.topic-card-current {
+  border-color: var(--color-brand-200);
+  box-shadow: 0 0 0 2px var(--color-brand-50);
+}
+
+.topic-card-warning {
+  border-left: 3px solid var(--color-warning-500);
+}
+
+.topic-card-primary,
+.topic-card-success {
+  border-left: 3px solid var(--color-brand);
+}
+
+.topic-card-muted {
+  border-left: 3px solid var(--color-gray-300);
+}
+
+.tc-header {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 14px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+}
+
+.tc-header:hover {
+  background: #fbfcfe;
+}
+
+.tc-index {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+  color: var(--color-gray-500);
+  font-size: var(--text-xs);
+  font-weight: 750;
+}
+
+.tc-heading {
+  min-width: 0;
+}
+
+.tc-title-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tc-title-line h4 {
+  margin: 0;
+  color: var(--color-gray-900);
+  font-size: var(--text-md);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.tc-heading p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--color-gray-500);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.tc-expand-label {
+  padding-top: 5px;
+  color: var(--color-brand-700);
+  font-size: var(--text-xs);
+  font-weight: 650;
+}
+
+.tc-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.tc-status-success,
+.tc-status-primary {
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+}
+
+.tc-status-warning {
+  background: var(--color-warning-50);
+  color: var(--color-warning-700);
+}
+
+.tc-status-muted {
+  background: var(--color-gray-100);
+  color: var(--color-gray-500);
+}
+
+.tc-body {
+  display: grid;
+  gap: 12px;
+  padding: 0 14px 14px 53px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.tc-question-block,
+.tc-followups,
+.tc-criteria-box {
+  padding-top: 12px;
+}
+
+.tc-block-label {
+  display: inline-flex;
+  margin-bottom: 6px;
+  color: var(--color-gray-500);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.tc-question-block p,
+.tc-followup-list p {
+  margin: 0;
+  color: var(--color-gray-700);
+  font-size: var(--text-base);
+  line-height: 1.65;
+}
+
+.tc-question-block {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--color-brand-50);
+}
+
+.tc-followup-list {
+  display: grid;
+  gap: 8px;
+}
+
+.tc-followup-list p {
+  padding-left: 10px;
+  border-left: 2px solid var(--color-brand-200);
+  font-size: var(--text-sm);
+}
+
+.tc-signals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.tc-signals ul,
+.tc-criteria {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tc-signals li {
+  position: relative;
+  padding-left: 12px;
+  color: var(--color-gray-600);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+
+.tc-signals li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-gray-400);
+}
+
+.tc-criteria-box {
+  border-top: 1px solid var(--color-border-light);
+}
+
+.tc-criterion {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--color-gray-600);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.tc-criterion-icon {
+  width: 16px;
+  flex: 0 0 auto;
+  color: var(--color-gray-400);
+  font-weight: 750;
+}
+
+.tc-criterion-supported,
+.tc-criterion-supported .tc-criterion-icon {
+  color: var(--color-brand-700);
+}
+
+.tc-criterion-partial,
+.tc-criterion-partial .tc-criterion-icon {
+  color: var(--color-warning-700);
+}
+
+@media (max-width: 760px) {
+  .tc-body {
+    padding-left: 14px;
+  }
+
+  .tc-signals {
+    grid-template-columns: 1fr;
+  }
+}

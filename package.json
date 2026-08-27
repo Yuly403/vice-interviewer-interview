@@ -1,0 +1,32 @@
+{
+  "name": "vice-interviewer",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:api": "pnpm --filter @vice/api dev",
+    "dev:web": "pnpm --filter @vice/web dev",
+    "build": "pnpm --filter @vice/database exec prisma generate && pnpm -r build",
+    "start:prod": "node apps/api/dist/server.mjs",
+    "preview": "pnpm --filter @vice/web preview",
+    "db:seed": "pnpm --filter @vice/database db:seed",
+    "typecheck": "pnpm -r typecheck",
+    "check": "pnpm typecheck && pnpm test",
+    "test": "vitest run",
+    "test:unit": "vitest run --config vitest.unit.config.ts",
+    "test:watch": "vitest",
+    "test:domain": "vitest run test/domain/",
+    "test:api": "vitest run test/api/",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "pnpm --filter @vice/database db:seed-e2e && playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@vitest/coverage-v8": "^2.1.9",
+    "playwright": "^1.61.1",
+    "vitest": "^2.1.9"
+  }
+}

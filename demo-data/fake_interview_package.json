@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "idempotencyKey": "synthetic-demo-interview-20260826-001",
+  "candidateKey": "candidate-lincheng-demo",
+  "applicationKey": "application-demo-001",
+  "jobKey": "job-ai-workflow-pm-demo",
+  "interviewId": "interview-demo-001",
+  "round": "初面",
+  "scheduledAt": "2026-09-01T02:00:00.000Z",
+  "durationMinutes": 45,
+  "interviewers": [
+    { "name": "面试官甲" }
+  ],
+  "job": {
+    "title": "AI 工作流产品经理",
+    "jdText": "负责企业 AI 工作流产品的问题发现、方案设计、试点验证与效果评测。要求能够定义人机协同边界、结构化输出和异常降级。",
+    "internalCriteria": [
+      "能以真实项目说明个人职责、关键动作和结果",
+      "能解释 AI 建议与人工决策的责任边界",
+      "能设计可执行的产品效果评测"
+    ],
+    "dimensions": ["问题定义", "产品设计", "AI 可靠性", "推动与复盘"],
+    "policyVersion": "synthetic-demo-v1"
+  },
+  "candidate": {
+    "displayName": "林澄",
+    "resumeText": "有四年企业软件产品经验。负责过客服知识检索助手，访谈十二名一线人员并在三十人范围试点；设计引用来源、低置信度提示和人工确认流程。",
+    "resumeHash": "synthetic-not-a-real-document-hash"
+  },
+  "screening": {
+    "rating": "建议进入初面",
+    "strengths": ["有 AI 工作流产品案例", "关注证据引用和人工确认"],
+    "verificationPoints": ["试点采用率口径", "去重策略中的个人贡献", "错误引用的处置机制"],
+    "sourceNotes": ["全部内容为 synthetic demo data"]
+  },
+  "previousRounds": []
+}

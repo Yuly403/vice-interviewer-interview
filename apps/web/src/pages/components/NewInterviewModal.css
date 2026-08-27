@@ -1,0 +1,136 @@
+.nim-form {
+  display: grid;
+  gap: 22px;
+}
+
+.nim-intro {
+  margin: 0;
+  color: var(--color-gray-600);
+}
+
+.nim-submit-error {
+  padding: 11px 12px;
+  border: 1px solid var(--color-danger-100);
+  border-radius: 8px;
+  background: var(--color-danger-50);
+  color: var(--color-danger-700);
+  font-size: var(--text-sm);
+}
+
+.nim-section {
+  display: grid;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.nim-section-head h3 {
+  margin: 0;
+  color: var(--color-gray-900);
+  font-size: var(--text-md);
+}
+
+.nim-section-head p {
+  margin: 4px 0 0;
+  color: var(--color-gray-500);
+  font-size: var(--text-sm);
+}
+
+.nim-grid,
+.nim-material-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.nim-field {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.nim-field > span {
+  color: var(--color-gray-700);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.nim-field b {
+  color: var(--color-danger-500);
+}
+
+.nim-field [aria-invalid="true"] {
+  border-color: var(--color-danger-500);
+}
+
+.nim-field [aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-50);
+}
+
+.nim-field-error {
+  color: var(--color-danger-700);
+  font-size: var(--text-xs);
+}
+
+.nim-material-textarea {
+  min-height: 180px;
+}
+
+.nim-privacy-note {
+  margin: -2px 0 0;
+  color: var(--color-gray-500);
+  font-size: var(--text-xs);
+}
+
+.nim-generate-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--color-brand-100);
+  border-radius: 10px;
+  background: var(--color-brand-50);
+  cursor: pointer;
+}
+
+.nim-generate-option input {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--color-brand);
+}
+
+.nim-generate-option span {
+  display: grid;
+  gap: 4px;
+}
+
+.nim-generate-option strong {
+  color: var(--color-gray-800);
+  font-size: var(--text-sm);
+}
+
+.nim-generate-option small {
+  color: var(--color-gray-600);
+  line-height: 1.55;
+}
+
+.nim-hidden-submit {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .nim-grid,
+  .nim-material-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nim-material-textarea {
+    min-height: 150px;
+  }
+}
