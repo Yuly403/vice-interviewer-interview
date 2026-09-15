@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题或凭据泄露
+    url: https://github.com/Yuly403/vice-interviewer-interview/security/advisories/new
+    about: 请勿在公开 Issue 中披露凭据、内部地址或安全细节，请改用私密渠道上报。
+  - name: 项目能力边界与已知缺口
+    url: https://github.com/Yuly403/vice-interviewer-interview/blob/main/docs/project-status.md
+    about: 提问前请先确认该能力是否已实现，或已被列为已知缺口。
+  - name: 本地开发与排障
+    url: https://github.com/Yuly403/vice-interviewer-interview/blob/main/docs/development.md
+    about: 安装、命令、环境变量与常见失败原因的说明。

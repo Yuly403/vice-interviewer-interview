@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: typecheck + unit tests + build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      # @prisma/client 的 postinstall 在 monorepo 中找不到 schema，
+      # 因此必须显式生成，否则 Prisma 类型退化为 any，typecheck 会报 TS7006。
+      - name: 生成 Prisma Client
+        run: pnpm --filter @vice/database exec prisma generate
+
+      - name: 类型检查
+        run: pnpm typecheck
+
+      # 纯单元与适配边界测试：不需要数据库，也不需要任何密钥。
+      - name: 单元测试
+        run: pnpm test:unit
+
+      # 已在 Ubuntu WSL2 的无密钥、无数据库环境完成验证。
+      - name: 生产构建
+        run: pnpm build

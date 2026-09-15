@@ -1,0 +1,100 @@
+name: 智能体开发任务
+description: 为 Codex、WorkBuddy 或双方协作创建范围明确、可验收的任务
+title: "[Agent Task] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板是智能体工作的唯一任务入口。先明确主负责人和边界，再开始修改代码。
+
+  - type: dropdown
+    id: owner
+    attributes:
+      label: 主负责人
+      description: 一个任务同一时刻只能有一个主写智能体；Shared 仍需在任务说明中指定主写者。
+      options:
+        - Codex
+        - WorkBuddy
+        - Shared（请在任务说明中指定主写者）
+        - 人类贡献者
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景与证据
+      description: 说明为什么需要这个任务，并附代码位置、日志、截图或复现命令。
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: 目标
+      description: 用可验证的结果描述本任务要完成什么。
+    validations:
+      required: true
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: 非目标
+      description: 明确本任务不处理的相邻问题，防止范围膨胀。
+    validations:
+      required: true
+
+  - type: textarea
+    id: allowed_scope
+    attributes:
+      label: 允许修改范围
+      description: 列出允许修改的目录、模块或文件。
+    validations:
+      required: true
+
+  - type: textarea
+    id: forbidden_scope
+    attributes:
+      label: 禁止修改范围
+      description: 列出不能触碰的模块、数据、接口或基础设施。
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 每一项都应当可以通过测试、命令、界面或文档证据验证。
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: 测试与验证要求
+      description: 写明必须运行的命令，以及无法运行时需要报告的证据。
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 依赖、阻塞与待确认事项
+      description: 列出依赖的 Issue / PR、产品决策、权限或外部环境。
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 开工确认
+      options:
+        - label: 已确认不会提交真实候选人数据、真实凭据或内部基础设施信息
+          required: true
+        - label: 已为主负责人准备独立工作副本和独立分支
+          required: true
+        - label: 已确认智能体不会自行合并本任务的 Pull Request
+          required: true
