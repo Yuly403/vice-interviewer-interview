@@ -1,0 +1,71 @@
+name: 缺陷报告
+description: 报告一个可复现的问题（请勿在此提交真实候选人数据或任何凭据）
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提交前请确认：
+        - 这是**脱敏技术验证版**仓库，请使用 `demo-data/` 中的虚构数据复现。
+        - 不要在 Issue 中粘贴真实简历、逐字稿、面评、Token、Cookie 或数据库连接串。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 现象
+      description: 实际发生了什么？期望是什么？
+      placeholder: |
+        实际：
+        期望：
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 给出最小可复现步骤，包含具体命令或接口调用。
+      placeholder: |
+        1. pnpm install --frozen-lockfile
+        2. ...
+        3. 观察到 ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - apps/api
+        - apps/web
+        - packages/domain
+        - packages/contracts
+        - packages/database
+        - packages/llm
+        - 测试 / CI
+        - 文档
+        - 不确定
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本与提交
+      description: commit SHA、分支名，或 Node / pnpm 版本。
+      placeholder: 例如 main@29f2053，Node 22.22.2，pnpm 9.15.9
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或错误输出
+      description: 粘贴关键输出即可，注意先去除任何凭据与真实数据。
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我已确认内容不包含真实候选人数据、真实凭据或内部基础设施信息
+          required: true
