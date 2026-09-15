@@ -11,11 +11,14 @@
 5. **导入约定**：ESM，TS 源码内相对导入必须带 `.js` 后缀。
 6. **新增无数据库测试**必须登记到 `vitest.unit.config.ts` 的 `include`。
 7. **红线**：不引入真实凭据 / 内部域名 / 内部 IP / 真实候选人数据；不新增必然失败的 CI 步骤。
+8. **协作边界**：WorkBuddy 使用独立工作副本和 `workbuddy/*` 分支，以 GitHub Issue 为任务来源，完成后提交 PR；不得直接修改或合并 `main`，不得与 Codex 共享同一工作目录并发写入。
+9. **调度边界**：不要通过 Git Hook、定时轮询或反向启动 Codex 自动开工。需要技术决策时写入 Issue / PR，由 Codex 或人类 Owner 处理。
 
 ## 常用命令
 
 ```bash
 pnpm install --frozen-lockfile
+pnpm --filter @vice/database exec prisma generate
 pnpm test:unit     # 无数据库、无密钥
 pnpm typecheck
 ```

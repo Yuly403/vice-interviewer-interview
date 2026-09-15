@@ -14,6 +14,7 @@
 ```bash
 corepack enable
 pnpm install --frozen-lockfile
+pnpm --filter @vice/database exec prisma generate
 pnpm test:unit        # 纯单元测试：不需要数据库、不需要 LLM Key
 pnpm typecheck        # 各包 tsc --noEmit
 ```
@@ -79,7 +80,14 @@ TEST_DATABASE_URL=postgresql://user:pass@127.0.0.1:5432/vice_interviewer_test pn
 ## 7. 提交与 PR
 
 分支命名、提交信息、PR 检查清单和证据要求见 [docs/agent-collaboration.md](docs/agent-collaboration.md)。
-要点：小步提交、PR 里写清「已验证 / 未验证」、不把未执行的事情写成已完成。
+要点：
+
+- 人类 Owner 决定产品方向与最终验收；Codex 负责需求拆解、架构、审查与集成；WorkBuddy 负责边界明确的实现、测试和文档任务。
+- 每个开发任务先建立 GitHub Issue，写清主负责人、允许修改范围、非目标、验收标准和测试要求。
+- 每个智能体使用独立克隆或 Git worktree，以及自己的 `codex/*`、`workbuddy/*` 分支；禁止共享同一工作目录或分支进行并发写操作。
+- GitHub Issue / PR 记录动态状态，`AGENTS.md` 与 `docs/` 记录稳定事实；不要用对话记忆或一个被多人反复修改的全局状态文件充当任务队列。
+- 小步提交，PR 里写清「已验证 / 未验证」，不把未执行的事情写成已完成。智能体不得自行合并 PR。
+- 当前不使用 Git Hook、定时轮询或智能体互相递归调用来自动开工；任何自动调度必须单独评审权限、任务认领、超时、重试、成本和熔断机制。
 
 ## 8. 已知缺口（改这些之前先看）
 
