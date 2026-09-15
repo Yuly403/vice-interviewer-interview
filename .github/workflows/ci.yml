@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   verify:
-    name: typecheck + unit tests
+    name: typecheck + unit tests + build
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -49,3 +49,7 @@ jobs:
       # 纯单元与适配边界测试：不需要数据库，也不需要任何密钥。
       - name: 单元测试
         run: pnpm test:unit
+
+      # 已在 Ubuntu WSL2 的无密钥、无数据库环境完成验证。
+      - name: 生产构建
+        run: pnpm build

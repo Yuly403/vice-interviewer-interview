@@ -129,7 +129,7 @@ Reviewer 重点检查：
 | 分支与提交规范 | 已提供（本文档） |
 | PR 模板 | 已提供（`.github/PULL_REQUEST_TEMPLATE.md`） |
 | Issue 模板 | 已提供（缺陷、功能、智能体任务） |
-| CI（安装 + typecheck + 单元测试） | 已提供（`.github/workflows/ci.yml`） |
+| CI（安装 + typecheck + 单元测试 + 生产构建） | 已提供（`.github/workflows/ci.yml`） |
 | 动态任务队列 | GitHub Issue；不使用共享状态文件轮询 |
 | CLI 自动调度 | **未启用**，需完成第 7 节控制项后单独建设 |
 | `main` 分支保护规则 | **未配置**，需仓库 Owner 在 GitHub 设置中开启 |

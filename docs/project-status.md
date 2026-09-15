@@ -14,7 +14,10 @@
 
 ## 2. 本次核验记录
 
-核验环境：Windows，Node 22.22.2，pnpm 9.15.9，2026-09-14。
+核验环境：
+
+- WorkBuddy：Windows，Node 22.22.2，pnpm 9.15.9，2026-09-14；
+- Codex 复验：Ubuntu WSL2，Node 22.22.1，pnpm 9.15.9，2026-09-15。
 
 | 检查项 | 结果 | 说明 |
 |---|---|---|
@@ -23,7 +26,7 @@
 | 测试文件静态统计 | **23 个文件 / 305 个 `it`/`test` 声明** | 与 README 声明一致 |
 | `prisma generate` | **通过** | 生成 Prisma Client v5.22.0 |
 | `pnpm typecheck` | **通过：6 个包全部通过** | 必须在 `prisma generate` 之后执行 |
-| `pnpm build` | **未完成（环境原因）** | `tsc` 步骤通过，`vite build` 被本机 esbuild 异常阻塞，与代码无关 |
+| `pnpm build` | **通过（Ubuntu WSL2）** | Web：106 个模块完成转换并生成产物；API：生成 `dist/server.mjs` 与 `dist/worker.mjs` |
 | 集成测试（`pnpm test`） | **未执行** | 未配置库名以 `_test` 结尾的专用 PostgreSQL |
 
 ### 重要：typecheck 必须晚于 prisma generate
@@ -42,13 +45,14 @@
 - **契约与 Prompt 安全**：Interview Package 严格校验、结构化输出解析、Prompt 不可信材料隔离与转义、LLM 失败分类、限流，共 48 个用例通过（`test/llm-*.test.ts`、`test/plan-generation.test.ts`）。
 - **适配边界**：飞书 OAuth（18 个用例）、飞书服务（2 个）、SSE 路由（10 个，含过期 token 拒绝）通过。
 - **Demo 数据有效性**：`test/demo-data.test.ts` 校验 `demo-data/` 通过真实 Zod Schema。
+- **生产构建**：Ubuntu WSL2 中执行 `pnpm build` 通过；Web 完成 106 个模块转换并生成静态产物，API 生成 `dist/server.mjs` 和 `dist/worker.mjs`。
 
 ## 4. 代码存在，但缺少端到端证据
 
 - **API 集成链路**：`test/api/` 下 7 个文件覆盖导入幂等、计划生命周期、面评全流程、同步流程、错误处理与鉴权，但**未执行**（需要专用 PostgreSQL）。因此「接口在真实数据库上按预期工作」这一点在本仓库中**未经验证**。
 - **前端界面**：`apps/web` 页面与组件齐全，其 `tsc --noEmit` 已随 `pnpm typecheck` 通过；但没有端到端或视觉回归测试，也没有截图证据，界面行为**未经验证**。
 - **实时字幕采集**：`capture-worker.ts` 的租约、游标、重试逻辑存在，但依赖真实飞书权限，脱敏版无法运行。
-- **生产构建**：`apps/api/build.mjs`（esbuild 单文件 ESM）与 `apps/web`（Vite）构建脚本存在。本次尝试执行 `pnpm build` 未成功——各包的 `tsc` 步骤通过，`vite build` 因本机 esbuild 二进制读取文件异常而失败（环境问题，非代码问题）。因此**生产构建在本仓库中尚未验证**。
+- **生产运行行为**：生产构建已经在 Ubuntu WSL2 通过，但尚未以生产配置启动产物并执行 HTTP、浏览器或进程级冒烟测试。因此“可以生成生产产物”已验证，“生产部署可用”仍未验证。
 
 ## 5. 设计存在，未验证
 
@@ -87,7 +91,7 @@
 
 1. **修复 `test/api` 的可运行性**：补齐 `prisma/migrations/`（或改用 `prisma db push`），否则 7 个集成测试文件永远无法执行，这是当前最大的验证盲区。
 2. **补齐或移除悬空脚本**：`db:seed`、`db:seed-e2e`、`test:e2e`。要么补文件，要么在 `package.json` 中移除，避免误导贡献者。
-3. **补 CI**：本次已提供安装 + `prisma generate` + `typecheck` + 单元测试的工作流，让「typecheck 必须先 generate」这一要求自动生效。
+3. **补 CI**：本次已提供安装 + `prisma generate` + `typecheck` + 单元测试 + 生产构建的工作流，让「typecheck 必须先 generate」和可构建性要求自动生效。
 4. **会前 `sourceRefs` 硬绑定**：补齐后可与会后 Evidence 达到同一证据等级。
 5. **跨进程事件通道**：引入 Outbox relay 或 Redis Pub/Sub，才能支撑多进程部署。
 6. **效果评测**：按 [eval-design.md](eval-design.md) 建立 Golden Dataset 并做历史时点回放；在此之前不要对外声称产品效果。
