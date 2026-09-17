@@ -2,6 +2,8 @@ node_modules/
 dist/
 build/
 *.tsbuildinfo
+# Vite 加载 vite.config.ts 时生成的临时文件（Windows 上常残留在 apps/web/ 下）
+vite.config.*.timestamp-*
 .env
 .env.*
 !.env.example
