@@ -140,7 +140,7 @@ not_started → generating → draft_ready → editing → approval_pending → 
 
 必须区分两类「验证」，不要把后者说成前者：
 
-- **工程验证（已执行）**：`pnpm test:unit`，16 个测试文件 / 246 个 test case，覆盖 Schema、状态机、Evidence 规则、Prompt 隔离、结构化输出、限流、降级、SSE 与飞书适配边界。它回答「约束是否生效」。
+- **工程验证（已执行）**：`pnpm test:unit`，16 个测试文件 / 246 个 test case，覆盖 Schema、状态机、Evidence 规则、Prompt 隔离、结构化输出、限流、降级、SSE 与飞书适配边界；本分支补齐 `prisma/migrations/` 后，又在一个一次性 `_test` PostgreSQL 上执行了全量 `pnpm test`，23 个测试文件 / 315 个 test case 通过（含 `test/api/` 的 7 个集成文件 69 个用例）。这两者回答的都是「约束是否生效」，不是产品效果。
 - **产品效果验证（未执行）**：Golden Dataset、历史时点回放、Suggestion Precision / Coverage / Redundancy / Evidence Accuracy / Latency / Silence Quality 等指标。方案见 [eval-design.md](eval-design.md)，**尚未测量**。
 
 因此本仓库**不能**声称「AI 建议有效」或「招聘判断准确」，只能声称相关工程约束已实现并有测试覆盖。
