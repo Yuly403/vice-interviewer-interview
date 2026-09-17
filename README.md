@@ -98,11 +98,13 @@ pnpm --filter @vice/database exec prisma generate
 pnpm dev
 ```
 
-仓库不包含生产 migration、部署脚本和真实飞书凭据。可使用 [demo-data/fake_interview_package.json](demo-data/fake_interview_package.json)、虚构 JD、简历和逐字稿理解或测试输入格式。未配置 LLM Key 时可观察规则兜底路径。
+仓库不包含生产环境的 migration 与运维脚本、部署脚本和真实飞书凭据（本分支新增的 `prisma/migrations/` 是由仓库内已公开的 `schema.prisma` 生成的开发/测试迁移链）。可使用 [demo-data/fake_interview_package.json](demo-data/fake_interview_package.json)、虚构 JD、简历和逐字稿理解或测试输入格式。未配置 LLM Key 时可观察规则兜底路径。
 
 ## 11. 已有测试
 
-提交版保留了 Unit Test、Schema Test、Prompt 安全与 LLM 传输防护测试，覆盖状态机、导入校验、Evidence、结构化输出、Prompt Injection 隔离、XML 转义、超时/错误分类、限流、计划回退、SSE 和飞书适配边界等。`pnpm test:unit` 运行不连接数据库的单元及适配边界集合：16 个测试文件、246 个 test case 已通过，其中包含使用 synthetic 请求上下文的 SSE/OAuth 边界测试。仓库共保留 23 个测试文件、静态统计 305 个 `it/test` 声明；其余数据库 API 集成用例没有在本脱敏流程中执行，因为未配置专用 `_test` PostgreSQL。
+提交版保留了 Unit Test、Schema Test、Prompt 安全与 LLM 传输防护测试，覆盖状态机、导入校验、Evidence、结构化输出、Prompt Injection 隔离、XML 转义、超时/错误分类、限流、计划回退、SSE 和飞书适配边界等。`pnpm test:unit` 运行不连接数据库的单元及适配边界集合：16 个测试文件、246 个 test case 已通过，其中包含使用 synthetic 请求上下文的 SSE/OAuth 边界测试。仓库共保留 23 个测试文件、静态统计 305 个 `it/test` 声明。
+
+本分支补齐了 `packages/database/prisma/migrations/`，并在一次性、可随时删除的 `_test` PostgreSQL 上实际执行了完整测试：`pnpm test` **23 个测试文件 / 315 个 test case 全部通过**（含 `test/api/` 7 个集成文件共 69 个用例）。在此之前，数据库 API 集成用例从未执行过，因为仓库既没有迁移链、也没有配置专用 `_test` PostgreSQL。执行环境、命令与两条复跑记录见 [docs/project-status.md](docs/project-status.md) 第 2 节。
 
 
 ## 12. 我的角色

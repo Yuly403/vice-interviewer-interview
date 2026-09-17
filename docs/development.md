@@ -108,9 +108,9 @@ pnpm dev
 | 现象 | 原因 | 处理 |
 |---|---|---|
 | `pnpm db:seed` 报找不到 `src/seed.ts` | `packages/database/src/seed.ts` 未包含在脱敏版中 | 用 `demo-data/` 的样例手工导入，或自行补 seed |
-| `pnpm --filter @vice/database db:reset` 失败 | 依赖 `seed.ts`，且 `prisma/migrations/` 不存在 | 同上 |
+| `pnpm --filter @vice/database db:reset` 失败 | 依赖 `seed.ts`，该文件仍不在仓库中 | 用 `demo-data/` 的样例手工导入，或自行补 seed |
 | `pnpm test:e2e` 无法运行 | 无 `playwright.config.*`、无 `e2e/`、`db:seed-e2e` 缺失 | 需要时自行补齐 |
-| `prisma migrate dev/deploy` 无迁移 | 仓库不含 `prisma/migrations/` | 本地用 `prisma db push` 建结构，或自行生成迁移 |
+| `prisma migrate dev/deploy` 报「无迁移」 | 只在不含本分支的基线上成立 | 本分支已含 `20260917084821_init`；更早的基线可用 `prisma db push` 建结构 |
 | `pnpm typecheck` 在 `@vice/database` 失败 | 未生成 Prisma Client | 先跑 `pnpm --filter @vice/database exec prisma generate` |
 | `pnpm test:unit` 找不到 `fastify` / `jsonwebtoken` | 未完整安装依赖 | 重新 `pnpm install --frozen-lockfile`（两个包从 `apps/api/node_modules` 解析） |
 | LLM 相关行为异常但无报错 | `DEEPSEEK_API_KEY` 为空，走的是规则兜底 | 这是预期行为；需要真实调用再填 Key |

@@ -94,7 +94,7 @@ TEST_DATABASE_URL=postgresql://user:pass@127.0.0.1:5432/vice_interviewer_test pn
 | 缺口 | 影响 |
 |---|---|
 | `packages/database/src/seed.ts`、`seed-e2e.ts` 不存在 | `pnpm db:seed`、`db:seed-e2e`、`db:reset` 会直接失败 |
-| 无 `prisma/migrations/` | `db:migrate:*` 无迁移可执行 |
+| `prisma/migrations/` | **本分支已补齐**（`20260917084821_init`），`db:migrate:*` 与 `pnpm test` 集成用例均可运行；不含本分支的基线仍无迁移可执行 |
 | 无 `playwright.config.*`、无 `e2e/` | `pnpm test:e2e` 无法运行 |
 | 进程内 SSE 事件总线 | API/Worker 分进程时实时推送可能丢失 |
 | 会前 `sourceRefs` 无逐条原文硬绑定 | 会前内容仍需面试官人工核对 |
